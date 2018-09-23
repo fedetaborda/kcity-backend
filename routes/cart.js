@@ -55,21 +55,21 @@ app.post('/num-compra/', mdAutenticacion.verificaToken, (req, res) => {
 // ==========================================
 // Obtener cantidad de copras realizadas
 // ==========================================
-app.get('/cant-compras',mdAutenticacion.verificaToken, (err, res) => {
+app.get('/cant-compras', mdAutenticacion.verificaToken, (req, res) => {
 
 
-        var id = '5ba15ad681cfdb0015585e15';
+    var id = req.usuario._id;
 
-        Cart.count( { usuario: id }, (err, conteo) => {
+    Cart.count({ usuario: id }, (err, conteo) => {
 
-                    res.status(200).json({
-                        ok: true,
-                        total_ventas: conteo,
-                    });
+        res.status(200).json({
+            ok: true,
+            total_ventas: conteo,
+        });
 
-                })
-    });
-    
+    })
+});
+
 
 // ==========================================
 // Obtener compras por usuario (todos los estados)
