@@ -76,7 +76,8 @@ app.post('/google', (req, res) => {
                             ok: true,
                             usuario: usuario,
                             token: token,
-                            id: usuario._id
+                            id: usuario._id,
+                            menu: obtenerMenu(usuario.role)
                         });
 
                     }
@@ -108,9 +109,10 @@ app.post('/google', (req, res) => {
 
                         res.status(200).json({
                             ok: true,
-                            usuario: usuarioDB,
+                            usuario: usuario,
                             token: token,
-                            id: usuarioDB._id
+                            id: usuario._id,
+                            menu: obtenerMenu(usuario.role)
                         });
 
                     });
@@ -198,7 +200,40 @@ app.post('/', (req, res) => {
 
 function obtenerMenu(ROLE) {
 
-    var menu = [{ menu: 'carga desde backend', }];
+    var menu = [{
+        titulo: 'Administracion',
+        submenu: [
+
+            {
+                titulo: 'Categorias',
+                items: [
+                    { titulo: 'Nueva Categoria', url: '/admin-prod/categorias' },
+                    { titulo: 'Listado de Categorias ', url: '' }
+                ]
+            },
+
+            {
+
+                titulo: 'Productos',
+                items: [
+                    { titulo: 'Nuevo Producto', url: '/admin-prod/nuevo' },
+                    { titulo: 'Listado de Producto', url: '' }
+                ]
+            },
+            {
+                titulo: 'Ventas',
+                items: [
+                    { titulo: 'Todas las Ventas', url: '' },
+                    { titulo: 'Listado de Ventas', url: '' }
+                ]
+            }
+
+        ]
+    }];
+
+    if (ROLE === 'USER_ROLE') {
+        menu = [];
+    }
 
     return menu;
 

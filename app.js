@@ -43,7 +43,7 @@ var mercadopagoRoutes = require('./routes/mercadopago');
 
 // mongodb://user-kcity:fede4303@ds215822.mlab.com:15822/kcity
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 mongoose.connection.openUri('mongodb://user-kcity:fede4303@ds215822.mlab.com:15822/kcity', (err, res) => {
 
